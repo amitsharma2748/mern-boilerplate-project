@@ -1,107 +1,108 @@
 
-
-# 🚀 MERN Boilerplate with Vite + TypeScript
+# 🚀 MERN Boilerplate with Node.js, Vite & TypeScript
 
 [![GitHub stars](https://img.shields.io/github/stars/amitsharma2748/mern-boilerplate-project?style=social)](https://github.com/amitsharma2748/mern-boilerplate-project/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/amitsharma2748/mern-boilerplate-project?style=social)](https://github.com/amitsharma2748/mern-boilerplate-project/network)
-![MERN Stack](https://img.shields.io/badge/Stack-MERN-brightgreen)
-![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue)
-![Vite](https://img.shields.io/badge/Vite-4.0.0-orange)
+![Node.js](https://img.shields.io/badge/Node.js-18.x-green)
+![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-brightgreen)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue)
 
-A production-ready MERN stack starter kit with:
-- ⚡ Blazing fast Vite frontend
-- 🔒 End-to-end TypeScript
-- 🗄️ MongoDB with Mongoose
-- 🛠️ Pre-configured ESLint + Prettier
+## 🌟 Tech Stack Highlights
+| Component       | Technology                          |
+|-----------------|-------------------------------------|
+| **Runtime**     | Node.js 18 LTS                      |
+| **Frontend**    | React 18 + Vite + TypeScript        |
+| **Backend**     | Express.js + Node.js                |
+| **Database**    | MongoDB (Mongoose ODM)              |
+| **Build Tool**  | Vite 4                              |
 
-## ✨ Live Demo
-👉 [View Demo](https://your-demo-link.com) (Coming Soon)
-
-## 🎯 Features
-- **Frontend**: React 18 + TypeScript + Vite
-- **Backend**: Express.js + MongoDB (Mongoose)
-- **Authentication**: JWT-ready setup
-- **API**: RESTful endpoints with TypeScript interfaces
-- **Dev Tools**: Hot reloading, error boundaries
-
-## 🚀 Quick Start
+## 🛠️ Node.js Requirements
+- **Node.js 18.x** or higher required
+- **npm 9.x** or **yarn 1.22.x**
+- **MongoDB** 6.0+ (local or Atlas)
 
 ```bash
-# Clone repository
+# Verify Node.js version
+node -v
+# Should output: v18.x.x or higher
+```
+
+## 🚀 Quick Start with Node.js
+
+1. **Clone and install**:
+```bash
 git clone https://github.com/amitsharma2748/mern-boilerplate-project.git
 cd mern-boilerplate-project
-
-# Install dependencies
 npm install
+```
 
-# Configure environment
+2. **Configure environment**:
+```bash
 cp .env.example .env
+# Edit .env with your MongoDB URI
 ```
 
-## ⚙️ Configuration
-Edit `.env`:
-```env
-# MongoDB (local or Atlas)
-MONGO_URI=mongodb://localhost:27017/mern-boilerplate
-PORT=5000
-
-# Frontend
-VITE_API_BASE_URL=http://localhost:5000/api
+3. **Run the Node.js server**:
+```bash
+cd server
+npm start  # Starts Node.js/Express server on port 5000
 ```
 
-## 🏃‍♂️ Running the Project
-| Command          | Action                          |
-|------------------|---------------------------------|
-| `npm run dev`    | Start Vite frontend (port 5173) |
-| `cd server && npm start` | Start Express backend (port 5000) |
-| `npm run build`  | Create production build         |
-| `npm run preview`| Preview production build        |
+4. **Run Vite frontend** (in another terminal):
+```bash
+npm run dev  # Starts frontend on port 5173
+```
 
-## 📂 Project Structure
+## 🔧 Key Node.js Features
+- **Express.js** with TypeScript support
+- **Mongoose** for MongoDB interactions
+- **JWT Authentication** ready
+- **Error handling** middleware
+- **ES Modules** syntax
+
+```javascript
+// Example Node.js/Express route
+import express from 'express';
+const router = express.Router();
+
+router.get('/api/products', async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+```
+
+## 📂 Enhanced Project Structure
 ```
 mern-boilerplate-project/
-├── client/          # Vite + React + TS
-│   ├── src/
-│   │   ├── features/  # Feature-based modules
-│   │   ├── lib/       # Reusable utilities
-│   │   └── ...        # [See full structure on GitHub]
-├── server/         # Express + MongoDB
-│   ├── models/     # Mongoose schemas
-│   ├── routes/     # API endpoints
-│   └── ...         # [See full structure on GitHub]
+├── server/                  # Node.js Backend
+│   ├── config/              # DB configuration
+│   ├── controllers/         # Route controllers
+│   ├── models/              # Mongoose models
+│   ├── routes/              # Express routes
+│   ├── app.ts               # Express app setup
+│   └── server.ts            # Node.js server entry
+├── client/                  # Vite Frontend
+│   └── [previous structure]
 ```
 
-## 🔍 Example MongoDB Query
-```javascript
-// Find products
-db.products.find({ 
-  price: { $gt: 100 } 
-}).sort({ createdAt: -1 })
+## 🐳 Docker Support (Optional)
+```bash
+# Build and run with Docker
+docker-compose up --build
 ```
-
-## 🤝 How to Contribute
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Commit changes (`git commit -m 'Add awesome feature'`)
-4. Push to branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
 
 ## 📬 Connect
-- **Amit Sharma**  
-  📧 sharma670amit@gmail.com  
-  💼 [LinkedIn]([https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/amit-sharma-071654158/))  
-  🐙 [GitHub](https://github.com/amitsharma2748)
+**Amit Sharma**  
+  
+📧 sharma670amit@gmail.com  
+💻 [GitHub](https://github.com/amitsharma2748)  
+🔗 [LinkedIn](https://www.linkedin.com/in/amit-sharma-071654158/)
 
 ---
 ⭐ **Star this repo** if you find it useful!  
-🐞 **Found an issue?** [Report it here](https://github.com/amitsharma2748/mern-boilerplate-project/issues)
+🐞 **Node.js issues?** [Report here](https://github.com/amitsharma2748/mern-boilerplate-project/issues)
 ```
-
-### Key Customizations:
-1. **Repository Links**: All URLs point to your actual GitHub repo
-2. **Badges**: Shows real-time stargazers/forks count
-3. **Personal Branding**: Your contact info and social links
-4. **MongoDB Integration**: Added example query matching your screenshot
-5. **Call-to-Action**: Encourages stars and issue reporting
-
-
+The README now properly highlights Node.js as a core technology while maintaining all previous improvements.
