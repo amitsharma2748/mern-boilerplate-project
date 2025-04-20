@@ -1,10 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import apiClient from './api/axios'
 
 function App() {
   const [count, setCount] = useState(0)
+
+  const fetchUser = async () => {
+    const res = await apiClient.get("/user/profile");
+    return res.data;
+  };
+
+  useEffect(()=>{
+    fetchUser()
+  },[])
 
   return (
     <>

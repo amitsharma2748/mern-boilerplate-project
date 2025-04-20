@@ -1,26 +1,52 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import productRoutes from './routes/product.routes';
+import winston from "winston";
+import passport from "passport";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import bodyParser from "body-parser";
+import express from "express";
 
+import { initProd } from "@startup/prod";
+import { initDB } from "@startup/db";
+import { initCORS } from "@startup/cors";
+import { initLogger } from "@startup/logging";
+import { initPassportJS } from "@startup/passport";
+import { initRoutes } from "@routes/index";
+import { initRateLimit } from "@startup/rate-limit";
+import dotenv from "dotenv";
 dotenv.config();
 
+const port = process.env.PORT || 3900;
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
+initPassportJS();
+initLogger();
+initCORS(app);
+initDB();
+initProd(app);
+initRateLimit(app);
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI as string)
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.error('MongoDB error:', err));
+// Create session
+app.use(
+  session({
+    // Used to compute a hash
+    secret: process.env.SESSION_KEY!,
+    resave: false,
+    saveUninitialized: false,
+    // cookie: { secure: true } when using HTTPS
+    // Store session on DB
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI || "mongodb://localhost:27017/test",
+    }),
+  })
+);
 
-  app.use('/api/products', productRoutes);
+// Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.send('API running with TypeScript');
-});
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+initRoutes(app);
+
+app.listen(port, () => winston.info(`Listening on port ${port}...`));
