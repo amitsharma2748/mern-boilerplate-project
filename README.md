@@ -1,6 +1,5 @@
 
 
-```markdown
 # 🚀 MERN Boilerplate with Vite + TypeScript
 
 [![GitHub stars](https://img.shields.io/github/stars/amitsharma2748/mern-boilerplate-project?style=social)](https://github.com/amitsharma2748/mern-boilerplate-project/stargazers)
